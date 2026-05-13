@@ -9,7 +9,7 @@ public class Mouse extends MouseAdapter {
     public boolean pressed;
     public boolean pressedFired; 
     
-    // ➡️ Define a common offset based on the JFrame title bar height
+    // Define a common offset based on the JFrame title bar height
     private static final int Y_OFFSET = 30; // Starting with 30 pixels
 
     public Mouse(GamePanel gp) {
