@@ -141,7 +141,7 @@ public class GamePanel extends JPanel implements Runnable {
         System.out.println("Calculated Square: Col=" + clickedCol + ", Row=" + clickedRow);
         System.out.println("Current Color: " + (currentColor == WHITE ? "WHITE" : "BLACK"));
         
-        // ----------------------------------------------------
+        
         
         for (Piece p : simPieces) {
             if (p.color == currentColor &&
@@ -163,7 +163,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
         private void handleMoveRelease() {
         if (validSquare) {
-            // Apply move to actual pieces
+
             copyPieces(simPieces, piece);
             activeP.updatePosition();
             if (castlingP != null) castlingP.updatePosition();
@@ -247,7 +247,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
             
             if (movingPiece != null) {
-                // 1. Capture opponent piece if present
+                //  Capture opponent piece if present
                 Piece captured = null;
                 for (Piece p : piece) {
                     // Standard capture
@@ -266,7 +266,7 @@ public class GamePanel extends JPanel implements Runnable {
                     piece.remove(captured);
                 }
                 
-                // 2. Handle Castling (Rook moves separately)
+                // 2. Handle Castling 
                 if (movingPiece.type == Type.KING && Math.abs(fromCol - toCol) == 2) {
                     int rookFromCol = (toCol == 6) ? 7 : 0; 
                     int rookToCol = (toCol == 6) ? 5 : 3; 
@@ -283,7 +283,7 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                 }
                 
-                // 3. Move the piece
+                // 3 Move the piece
                 movingPiece.preCol = movingPiece.col;
                 movingPiece.preRow = movingPiece.row;
                 movingPiece.col = toCol;
@@ -291,7 +291,7 @@ public class GamePanel extends JPanel implements Runnable {
                 movingPiece.updatePosition();
                 
                 
-                // 4. Handle Promotion
+                // 4 Handle Promotion
                 if (bestMove.length() == 5 && movingPiece.type == Type.PAWN) {
                     char promoChar = bestMove.charAt(4);
                     Type promoType = (promoChar == 'r') ? Type.ROOK :
@@ -328,7 +328,7 @@ public class GamePanel extends JPanel implements Runnable {
         repaint();
     }
     
-    // ---------------- Check/Mate/Stalemate Logic ----------------
+    // Stalemate logic
     
     
     private boolean tryMove(Piece piece, int targetCol, int targetRow) {
@@ -360,13 +360,13 @@ public class GamePanel extends JPanel implements Runnable {
         piece.moved = moved;
         piece.twoStepped = twoStepped;
         
-        // Re-add captured piece
+        // Re add captured piece
         if (hittingPIndex != -1) simPieces.add(hittingPIndex, hittingP);
 
         return !illegalMove;
     }
 
-    // Checks if the move is legal (i.e., doesn't result in the King being attacked)
+    // Checks if the move is legal ( doesn't result in the King being attacked)
     private boolean isValidMoveForCheckAndIllegal(Piece piece, int targetCol, int targetRow) {
         if (piece.canMove(targetCol, targetRow)) {
             return tryMove(piece, targetCol, targetRow);
@@ -430,7 +430,7 @@ public class GamePanel extends JPanel implements Runnable {
         return true; // No legal moves found, and not in check
     }
 
-    // ---------------- Utility Methods ----------------
+    //  Utility Methods 
 
     private Piece getKing(boolean opponent) {
         for (Piece p : simPieces) {
